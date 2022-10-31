@@ -4,7 +4,7 @@ import './index.css';
 
 const Button = (props) => {
   return (
-    <button>
+    <button onClick={props.reset}>
       {props.children}
     </button>
   );
@@ -12,17 +12,21 @@ const Button = (props) => {
 
 const Application = () => {
 
-  // your code here
+  const [name, setName] = useState('');
 
   const reset = () => {
-    console.log("reset");
-    // your code here
+    setName('');
   };
 
   return (
     <main>
-      <Button>Reset</Button>
-      <h1>Hello React</h1>
+      <input
+        value={name}
+        onChange={event => setName(event.target.value)}
+        placeholder="Type Your Name"
+      />
+      <Button reset={reset}>Reset</Button>
+      {name !== '' && <h1>Hello {name}</h1>}
     </main>
   );
 };
